@@ -1,3 +1,4 @@
+import { log } from 'console';
 import mongoose from 'mongoose';
 
 const MONGODB_URI= process.env.MONGODB_URI;
@@ -13,6 +14,8 @@ export const connectToDatabase = async ()=>{
         dbName:'evently',
         bufferCommands:false,
     })
+
+    console.log('Connected to database');
 
     cached.conn= await cached.promise;
     return cached.conn;
