@@ -12,8 +12,9 @@ const Checkout = ({event,userId}:{event:IEvent,userId: string}) => {
             eventId: event._id,
             price: event.price,
             isFree: event.isFree,
-            buyerId: userId,
+            buyerId: userId
         }
+        console.log("-------------order checkout",order)
         await checkoutOrder(order);
     }
     useEffect(() => {
@@ -27,7 +28,7 @@ const Checkout = ({event,userId}:{event:IEvent,userId: string}) => {
         }
       }, []);
   return (
-    <form action={onCheckout} method="post">
+    <form action={onCheckout} method="POST">
         <Button type="submit" role="link" size="lg" className="button sm:w-fit">
             {event.isFree? 'Get Ticket' : 'Buy Ticket'}
         </Button>
