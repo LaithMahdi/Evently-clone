@@ -44,22 +44,6 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
   }
 }
 
-// export const createOrder = async (order: CreateOrderParams) => {
-//   try {
-//     await connectToDatabase();
-    
-//     const newOrder = await Order.create({
-//       ...order,
-//       event: order.eventId,
-//       buyer: order.buyerId,
-//     });
-//     console.log("Order created 2 :", JSON.parse(JSON.stringify(newOrder)));
-
-//     return JSON.parse(JSON.stringify(newOrder));
-//   } catch (error) {
-//     handleError(error);
-//   }
-// }
 export const createOrder = async (order: CreateOrderParams) => {
   try {
     await connectToDatabase();
@@ -72,9 +56,6 @@ export const createOrder = async (order: CreateOrderParams) => {
       event: eventObjectId,
       buyer: buyerObjectId,
     });
-
-    console.log("Order created:", JSON.parse(JSON.stringify(newOrder)));
-
     return JSON.parse(JSON.stringify(newOrder));
   } catch (error) {
     handleError(error);
@@ -162,7 +143,6 @@ export async function getOrdersByUser({ userId, limit = 3, page }: GetOrdersByUs
       })
 
     const ordersCount = await Order.distinct('event._id').countDocuments(conditions)
-  console.log("ordersCount: ", ordersCount)
     return { data: JSON.parse(JSON.stringify(orders)), totalPages: Math.ceil(ordersCount / limit) }
   } catch (error) {
     handleError(error)
